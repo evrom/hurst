@@ -27,7 +27,7 @@ pub fn rs_corrected(x: Vec<f64>) -> f64 {
 	while n[1] >= 8  {
 		let mut xl: Vec<f64> = vec![];
     let mut yl: Vec<f64> = vec![];
-		for i in 2..n.len() {
+		for i in 1..n.len() {
 			let rs: f64 = rscalc(&x[((n[i-1]+1) as usize)..(n[i] as usize)]);
 			xl.push((n[i]-n[i-1]) as f64);
 			yl.push(rs);
@@ -39,9 +39,7 @@ pub fn rs_corrected(x: Vec<f64>) -> f64 {
 	}
 	// apply linear regression
   let cap_x_log: Vec<f64> = cap_x.iter().map(|a| a.ln()).collect();
-  println!("{:?}", cap_x_log);
   let cap_y_log: Vec<f64> = cap_y.iter().map(|a| a.ln()).collect(); 
-  println!("{:?}", cap_y_log);
-  let (slope, intercept): (f64, f64) = linear_regression(&cap_x_log, &cap_y_log).unwrap();
+  let (slope, _): (f64, f64) = linear_regression(&cap_x_log, &cap_y_log).unwrap();
   return slope;
 }

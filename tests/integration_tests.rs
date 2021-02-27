@@ -8,7 +8,7 @@ fn test_rssimple() {
 
 #[test]
 fn test_rs_corrected() {
-    assert_eq!(hurst::rs_corrected(brown72::BROWN72.to_vec()), 0.73f64);
+    assert_eq!(hurst::rs_corrected(brown72::BROWN72.to_vec()), 0.7394639422875735f64);
 }
 
 #[test]
