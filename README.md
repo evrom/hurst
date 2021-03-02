@@ -1,5 +1,7 @@
 # Hurst
 
+[![Build Status](https://github.com/evrom/hurst/actions/workflows/ci.yml/badge.svg)](https://github.com/evrom/hurst/actions/workflows/ci.yml?query=branch%3Amaster)
+
 Hurst Exponent estimator functions for Rust 
 
 ## License
