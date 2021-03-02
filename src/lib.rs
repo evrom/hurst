@@ -1,4 +1,3 @@
-use stats::{stddev};
 use linreg::{linear_regression};
 
 pub mod utils;
@@ -14,7 +13,7 @@ pub fn rssimple(x: Vec<f64>) -> f64 {
     .collect();
     let s: Vec<f64> = cumsum(&y);
     let (min, max) = minmax(&s);
-    let rs: f64 =  (max - min)/ stddev(x.clone().into_iter());
+    let rs: f64 =  (max - min)/ standard_deviation(&x);
     return rs.log2() / n.log2();
 }
 

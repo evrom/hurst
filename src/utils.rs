@@ -1,11 +1,14 @@
-use stats::{stddev};
-
 pub fn mean(x: &[f64]) -> f64 {
   let sum: f64 = x.iter().sum();
   let n: f64 = x.len() as f64;
   return sum / n;
 }
 
+pub fn standard_deviation(x: &[f64]) -> f64 {
+  let mean_x: f64 = mean(x);
+  let sum_x_minus_mean: f64 = x.iter().map(|a| (a - mean_x).powi(2)).sum();
+  return (sum_x_minus_mean / (x.len() as f64)).sqrt();
+}
 
 pub fn cumsum(x: &[f64]) -> Vec<f64> {
   let result: Vec<f64> = x.iter()
@@ -29,7 +32,7 @@ pub fn rscalc(x: &[f64]) -> f64 {
   let y: Vec<f64> = cumsum(&x_minus_mean);
   let (min_y, max_y) = minmax(&y);
   let r: f64 = (max_y - min_y).abs();
-  let s: f64 = stddev(x.to_vec().into_iter());
+  let s: f64 = standard_deviation(&x);
   let result: f64 =  r / s;
   return result;
 }
