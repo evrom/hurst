@@ -12,7 +12,7 @@ pub fn rssimple(x: Vec<f64>) -> f64 {
     let s: Vec<f64> = cumsum(&y);
     let (min, max) = minmax(&s);
     let rs: f64 = (max - min) / standard_deviation(&x);
-    return rs.log2() / n.log2();
+    rs.log2() / n.log2()
 }
 
 /// Corrected R over S Hurst exponent
@@ -38,5 +38,5 @@ pub fn rs_corrected(x: Vec<f64>) -> f64 {
     let cap_x_log: Vec<f64> = cap_x.iter().map(|a| a.ln()).collect();
     let cap_y_log: Vec<f64> = cap_y.iter().map(|a| a.ln()).collect();
     let (slope, _): (f64, f64) = linear_regression(&cap_x_log, &cap_y_log).unwrap();
-    return slope;
+    slope
 }
