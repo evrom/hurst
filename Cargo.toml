@@ -1,15 +1,14 @@
 [package]
 name = "hurst"
+description = "Hurst Exponent estimator functions for Rust"
+readme = "README.md"
+homepage = "https://github.com/evrom/hurst"
+repository = "https://github.com/evrom/hurst"
+documentation = "https://docs.rs/hurst"
 version = "0.1.0"
 authors = ["Evan Roman <evanroman1@gmail.com>"]
 edition = "2018"
 license = "GPL-3.0-or-later"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
-wasm-bindgen="0.2.7"
 linreg = "0.2.0"
-
-[lib]
-crate-type = ["cdylib", "rlib"]
