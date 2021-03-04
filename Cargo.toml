@@ -12,3 +12,7 @@ license = "GPL-3.0-or-later"
 
 [dependencies]
 linreg = "0.2.0"
+wasm-bindgen = "0.2"
+
+[lib]
+crate-type = ["cdylib", "rlib"]

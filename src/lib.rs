@@ -1,10 +1,12 @@
 use linreg::linear_regression;
+use wasm_bindgen::prelude::*;
 
 pub mod utils;
 
 use utils::*;
 
 /// Simple R/S Hurst estimation
+#[wasm_bindgen]
 pub fn rssimple(x: Vec<f64>) -> f64 {
     let n: f64 = x.len() as f64;
     let x_mean: f64 = mean(&x);
@@ -16,6 +18,7 @@ pub fn rssimple(x: Vec<f64>) -> f64 {
 }
 
 /// Corrected R over S Hurst exponent
+#[wasm_bindgen]
 pub fn rs_corrected(x: Vec<f64>) -> f64 {
     let mut cap_x: Vec<f64> = vec![x.len() as f64];
     let mut cap_y: Vec<f64> = vec![rscalc(&x)];
