@@ -1,6 +1,7 @@
 # Hurst
 
 [![Build Status](https://github.com/evrom/hurst/actions/workflows/ci.yml/badge.svg)](https://github.com/evrom/hurst/actions/workflows/ci.yml?query=branch%3Amaster)
+[![crates.io badge](https://img.shields.io/crates/v/hurst.svg)](https://crates.io/crates/hurst)<br/>
 
 Hurst Exponent estimator functions for Rust 
 
