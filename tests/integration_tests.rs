@@ -3,7 +3,7 @@ mod brown72;
 
 #[test]
 fn test_rssimple() {
-    assert_eq!(hurst::rssimple(&brown72::BROWN72), 0.6591636065931848f64);
+    assert_eq!(hurst::rs_simple(&brown72::BROWN72), 0.6591636065931848f64);
 }
 
 #[test]
