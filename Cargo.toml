@@ -12,3 +12,4 @@ license = "GPL-3.0-or-later"
 
 [dependencies]
 linreg = "0.2.0"
+thiserror = "1.0.40"

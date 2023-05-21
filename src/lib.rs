@@ -1,7 +1,9 @@
 use linreg::linear_regression;
 
+mod errors;
 pub mod utils;
 
+pub use errors::*;
 use utils::*;
 
 /// Simple R/S Hurst estimation
@@ -16,7 +18,7 @@ pub fn rssimple(x: &[f64]) -> f64 {
 }
 
 /// Corrected R over S Hurst exponent
-pub fn rs_corrected(x: &[f64]) -> f64 {
+pub fn rs_corrected(x: &[f64]) -> Result<f64> {
     let mut cap_x: Vec<f64> = vec![x.len() as f64];
     let mut cap_y: Vec<f64> = vec![rscalc(&x)];
     let mut n: Vec<u64> = vec![0, x.len() as u64 / 2, x.len() as u64];
@@ -37,6 +39,8 @@ pub fn rs_corrected(x: &[f64]) -> f64 {
     // apply linear regression
     let cap_x_log: Vec<f64> = cap_x.iter().map(|a| a.ln()).collect();
     let cap_y_log: Vec<f64> = cap_y.iter().map(|a| a.ln()).collect();
-    let (slope, _): (f64, f64) = linear_regression(&cap_x_log, &cap_y_log).unwrap();
-    slope
+    let (slope, _): (f64, f64) =
+        linear_regression(&cap_x_log, &cap_y_log).map_err(|_| Error::LinearRegression)?;
+
+    Ok(slope)
 }
