@@ -1,3 +1,7 @@
+//! This crate provides functionality to compute the hurst exponent using rescaled range analysis
+
+#![deny(unused_crate_dependencies, missing_docs, unused_imports)]
+
 use linreg::linear_regression;
 
 mod errors;
@@ -9,18 +13,18 @@ use utils::*;
 /// Simple R/S Hurst estimation
 pub fn rssimple(x: &[f64]) -> f64 {
     let n: f64 = x.len() as f64;
-    let x_mean: f64 = mean(&x);
+    let x_mean: f64 = mean(x);
     let y: Vec<f64> = x.iter().map(|x| x - x_mean).collect();
     let s: Vec<f64> = cumsum(&y);
     let (min, max) = minmax(&s);
-    let rs: f64 = (max - min) / standard_deviation(&x);
+    let rs: f64 = (max - min) / standard_deviation(x);
     rs.log2() / n.log2()
 }
 
 /// Corrected R over S Hurst exponent
 pub fn rs_corrected(x: &[f64]) -> Result<f64> {
     let mut cap_x: Vec<f64> = vec![x.len() as f64];
-    let mut cap_y: Vec<f64> = vec![rscalc(&x)];
+    let mut cap_y: Vec<f64> = vec![rscalc(x)];
     let mut n: Vec<u64> = vec![0, x.len() as u64 / 2, x.len() as u64];
     // compute averaged R/S for halved intervals
     while n[1] >= 8 {
@@ -37,8 +41,8 @@ pub fn rs_corrected(x: &[f64]) -> Result<f64> {
         n = half(&n, x.len() as u64);
     }
     // apply linear regression
-    let cap_x_log: Vec<f64> = cap_x.iter().map(|a| a.ln()).collect();
-    let cap_y_log: Vec<f64> = cap_y.iter().map(|a| a.ln()).collect();
+    let cap_x_log = Vec::from_iter(cap_x.iter().map(|a| a.ln()));
+    let cap_y_log = Vec::from_iter(cap_y.iter().map(|a| a.ln()));
     let (slope, _): (f64, f64) =
         linear_regression(&cap_x_log, &cap_y_log).map_err(|_| Error::LinearRegression)?;
 
