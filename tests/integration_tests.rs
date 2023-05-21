@@ -3,16 +3,13 @@ mod brown72;
 
 #[test]
 fn test_rssimple() {
-    assert_eq!(
-        hurst::rssimple(brown72::BROWN72.to_vec()),
-        0.6591636065931848f64
-    );
+    assert_eq!(hurst::rssimple(&brown72::BROWN72), 0.6591636065931848f64);
 }
 
 #[test]
 fn test_rs_corrected() {
     assert_eq!(
-        hurst::rs_corrected(brown72::BROWN72.to_vec()),
+        hurst::rs_corrected(&brown72::BROWN72),
         0.7394639422875734f64
     );
 }

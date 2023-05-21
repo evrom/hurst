@@ -5,7 +5,7 @@ pub mod utils;
 use utils::*;
 
 /// Simple R/S Hurst estimation
-pub fn rssimple(x: Vec<f64>) -> f64 {
+pub fn rssimple(x: &[f64]) -> f64 {
     let n: f64 = x.len() as f64;
     let x_mean: f64 = mean(&x);
     let y: Vec<f64> = x.iter().map(|x| x - x_mean).collect();
@@ -16,7 +16,7 @@ pub fn rssimple(x: Vec<f64>) -> f64 {
 }
 
 /// Corrected R over S Hurst exponent
-pub fn rs_corrected(x: Vec<f64>) -> f64 {
+pub fn rs_corrected(x: &[f64]) -> f64 {
     let mut cap_x: Vec<f64> = vec![x.len() as f64];
     let mut cap_y: Vec<f64> = vec![rscalc(&x)];
     let mut n: Vec<u64> = vec![0, x.len() as u64 / 2, x.len() as u64];
